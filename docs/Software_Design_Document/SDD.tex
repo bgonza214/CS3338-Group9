@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{hyperref}
+
+\geometry{a4paper, margin=1in}
+
+\title{Southern California Edison VR Training Simulation\\
+Software Design Document}
+\author{Brailey Gonzalez, Kevin Guerrero, Derek Rosales}
+\date{December 2025}
+
+\setlength{\droptitle}{6cm}
+
+\pagestyle{fancy}
+\fancyhead[L]{SCE VR Training Simulation SDD}
+\fancyhead[R]{Page \thepage}
+\fancyfoot[C]{}
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+\section*{Version History}
+\addcontentsline{toc}{section}{Version History}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{User} & \textbf{Date} & \textbf{Reason for Changes} & \textbf{Version}\\
+    \hline
+    Brailey Gonzalez & 12/5/25 & Snapshot 1 Update & 1.0 \\
+    \hline
+    Kevin Guerrero & 12/6/25 & Snapshot 2 Update & 2.0 \\
+    \hline
+    Derek Rosales & 12/7/25 & Snapshot 3 Update & 3.0 \\
+    \hline
+    Team & 12/9/25 & Snapshot 4 Update & 4.0 \\
+    \hline
+    \end{tabular}
+\end{table}
+\newpage
+
+\section{Introduction}
+\subsection{Purpose}
+This Software Design Document (SDD) serves as a blueprint for the creation of the Worker Training Simulation (WTS) program.  
+It provides a structured plan that outlines the system’s architecture, core functionality, and design decisions.  
+The document is intended to guide the development team by clearly defining how the VR training environment will be built,  
+how users will interact with the system, and how data will be managed.
+
+\subsection{Scope}
+The scope of this document includes the design and implementation of the WTS.  
+It covers the VR framework setup, database integration, and task delegation for the development team.
+
+\subsection{Intended Audience}
+The intended audience for this document includes the development team, and users who will specifically be trainees who perform field work such as electrical wiring, equipment handling, and safety tasks.
+
+\subsection{Overview}
+The WTS application will be a VR-based simulation that allows workers to practice tasks safely in a virtual environment.  
+The application will provide a user-friendly interface and will be designed to improve safety awareness, task proficiency, and experience.
+
+\subsection{References}
+See the references section for a list of documents and resources referenced in this document.
+
+\subsection{Definitions, Acronyms, and Abbreviations}
+See the glossary section for definitions of terms, acronyms, and abbreviations used in this document.
+\newpage
+
+\section{System Architecture}
+\subsection{Workflow}
+\begin{itemize}
+    \item Trainee logs in through the VR client using their credentials.
+    \item Trainee selects a training scenario.
+    \item Trainee performs tasks such as wiring tasks and equipment management.
+    \item The VR client logs trainee actions and sends them to the backend.
+    \item The backend stores data in the PostgreSQL database.
+    \item Scores are generated and stored for later review.
+\end{itemize}
+
+\subsection{Site Breakdown}
+\begin{itemize}
+    \item \textbf{VR Client:} Developed in Unity with Oculus SDK and OpenXR support.
+    \item \textbf{Backend Services:} Implemented in Node.js with Express for REST APIs.
+    \item \textbf{Database:} PostgreSQL database for storing trainee accounts, scenarios, and training scores.
+    \item \textbf{Version Control:} GitHub repository for collaboration and code management.
+\end{itemize}
+
+\subsection{Architecture Overview}
+The VR client follows a Model-View-Controller (MVC) architectural pattern:
+\begin{itemize}
+    \item \textbf{Model:} Represents training data and user progress.
+    \item \textbf{View:} VR environment and user interface.
+    \item \textbf{Controller:} Handles interactions and communication with backend APIs.
+\end{itemize}
+
+\subsection{Data Flow}
+\begin{enumerate}
+    \item The trainee interacts with objects in the VR training room.
+    \item The VR client logs actions and sends them to the backend via REST API.
+    \item The backend stores data in PostgreSQL.
+    \item Scores are calculated and stored for each trainee session.
+\end{enumerate}
+\newpage
+
+\section{User Interface}
+\subsection{How to Use}
+\subsubsection{VR Client}
+Launch the VR application on a supported headset. The main menu contains options for:
+\begin{itemize}
+    \item \textbf{Begin Training:} Enter the simulation.
+    \item \textbf{Select Training}
+    \item \textbf{Perform Tasks}
+    \item \textbf{Receive Score:} Score is displayed when training is complete.
+    \item \textbf{Exit:} Close the application.
+\end{itemize}
+
+Inside the simulation:
+\begin{itemize}
+    \item Trainees can pick up, move, and inspect objects.
+    \item Feedback is provided through object highlights and end-of-session scores.
+\end{itemize}
+
+\subsection{Database Explanation}
+The database for the WTS is implemented using PostgreSQL.  
+It stores all data related to trainees and their training sessions, including:
+\begin{itemize}
+    \item \textbf{Trainee Accounts:} Login credentials (username, password).
+    \item \textbf{Profiles:} Basic trainee details such as name and department.
+    \item \textbf{Training Sessions:} Records of each session including scenario ID, start/end time, and completion status.
+    \item \textbf{Scores:} Performance scores generated from each training session.
+    \item \textbf{Scenario Definitions:} Stored procedures, hazards, and scoring rules for training modules.
+\end{itemize}
+
+Database management tools such as pgAdmin and DBeaver will be used to administer PostgreSQL.
+\newpage
+
+\section*{Glossary}
+\addcontentsline{toc}{section}{Glossary}
+\begin{description}
+    \item[\textbf{WTS}] - Worker Training Simulation
+    \item[\textbf{VR}] - Virtual Reality
+    \item[\textbf{SDK}] - Software Development Kit
+    \item[\textbf{UI}] - User Interface
+    \item[\textbf{MVC}] - Model-View-Controller
+    \item[\textbf{PostgreSQL}] - Relational database management system used for WTS
+\end{description}
+\newpage
+
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{9}
+    Ascent - Project (2022). \url{https://ascent.cysun.org/project/project/view/187}
+\end{thebibliography}
+
+\end{document}
