@@ -1,0 +1,355 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+
+% Use a clean, simple sans-serif font
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\setstretch{1.15}
+
+\begin{document}
+
+%------------------ Title Page ------------------%
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\LARGE Software Requirements Specification\\[0.5cm]
+    for\\[0.5cm]
+    VR Training\par}
+    \vspace{1cm}
+    {\large Version 1.01 approved\par}
+    \vspace{2cm}
+    {\large Prepared by\\[0.5cm]
+    Kevin Guerrero, Derek Rosales, Brailey Gonzalez-Oxlaj\par}
+    \vfill
+    {\large Southern California Edison\\[0.5cm]
+    10/21/22\par}
+\end{titlepage}
+
+%------------------ Table of Contents ------------------%
+\tableofcontents
+\newpage
+
+%------------------ Revision History ------------------%
+\section*{Revision History}
+\addcontentsline{toc}{section}{Revision History}
+
+\begin{longtable}{|>{\raggedright}p{4cm}|>{\raggedright}p{3cm}|>{\raggedright}p{6cm}|>{\centering}p{1.5cm}|}
+\hline
+\textbf{Name} & \textbf{Date} & \textbf{Reason For Changes} & \textbf{Version} \\
+\hline
+Entire Group & 10/21/25 & First draft & 1.0 \\
+\hline
+Entire Group & 10/24/25 & Snapshot 1  & 2.0 \\
+\hline
+Entire Group & 11/1/25 & Snapshot 2 & 3.0 \\
+\hline
+Entire Group & 11/5/25 & Snapshot 3 & 4.0 \\
+\hline
+Entire Group & 11/14/25 & Snapshot 4 & 5.0 \\
+\hline
+\end{longtable}
+
+\newpage
+
+% 1. Introduction %
+\section{Introduction}
+The software requirements specification document will cover the features and requirements of the Virtual Reality Training Application (VRTA). This document will provide an overview of how the project is developed, the requirements from our sponsor, and the functionality of the application. The VRTA will be used as a training tool that will guide the user through a simulated training environment.
+
+\subsection{Purpose}
+The purpose of the VRTA is to assist in the training of 3rd party contractors that are hired by Southern California Edison (SCE). SCE frequently uses outside contractors to do work for them but they often do not receive the same kind of training that regular employees get. The VRTA solves this issue by allowing SCE to train these contractors through the use of virtual reality. In this document the requirements of the VRTA will be listed throughout.
+
+\subsection{Intended Audience and Reading Suggestions}
+The software requirements specification document is intended for developers, project managers, documentation writers, and anyone else who would like to further their knowledge about how this application will be developed. This includes the SCE team who is sponsoring the project, the Senior Design team who are developing this project, and the advisor to our project. Once you read this introduction section it is recommended that you read the overall description in Section~2 to get a better idea of the entire project. If the reader is looking for a specific topic, check the table of contents.
+
+\subsection{Product Scope}
+Unity is a big player. Our software application is called the Virtual Reality Training Application (VRTA). This application will guide the users through training processes and also evaluate their performance. Our software will guide the trainee through an underground maintenance area where they will have to perform various tasks they will be graded on. Once our application is deployed it is possible that it can be further updated to include other training scenarios.
+
+
+
+
+% 2. Overall Description%
+\section{Overall Description}
+Our capstone project aims to help new and current field workers train to install Power Delivery Products (PDP) Smart Navigator Low Current Overhead Remote Fault Indicator (Navigator) for overhead. And for underground, the installation of non-submersible Power Delivery Products (PDP) Remote Fault Indicator (RFI).
+
+\subsection{System Analysis}
+
+\subsubsection{Project Goals}
+\begin{itemize}
+    \item[2.1.1.1] Train the proper installation steps of various products.
+    \item[2.1.1.2] Ensure the user follows all safety protocols during installation and use of equipment.
+\end{itemize}
+
+\subsubsection{Major Technical Hurdles}
+\begin{itemize}
+    \item[2.1.2.1] The team wasn’t familiar with working with Unity, Blender, Meta Quest 2.
+    \item[2.1.2.2] The VRTA must be intuitive to use.
+    \item[2.1.2.3] The virtual environment should look as realistic as possible.
+    \item[2.1.2.4] Not familiar with the training, possible errors of the equipment installation process.
+    \item[2.1.2.5] Detecting if a user violated any safety protocols.
+    \item[2.1.2.6] Assessing the correctness of the installation.
+\end{itemize}
+
+\subsubsection*{3. Possible Solutions}
+\noindent\textbf{3.1 User Guide Map}
+\begin{itemize}
+    \item[3.1.1] Using YouTube to guide us through examples of how to use Blender and Unity properly.
+    \item[3.1.2] Use the instruction templates provided by SCE to provide an accurate VR training experience.
+\end{itemize}
+
+\subsection{Product Perspective}
+There are companies who create virtual reality for training. Those companies who create virtual reality for training have many different training situations, except the one that teaches workers how to properly and safely install Power Delivery Products (PDP) Smart Navigator Low Current Overhead Remote Fault Indicator (Navigator) for overhead. And for underground, the installation of non-submersible Power Delivery Products (PDP) Remote Fault Indicator (RFI).
+
+\subsection{Product Functions}
+
+\subsubsection*{2.3.1 Interaction with the virtual environment}
+\textbf{Overhead}
+\begin{itemize}
+    \item The virtual environment will contain tools, electric poles, powerlines, and a utility truck.
+\end{itemize}
+
+\textbf{Underground}
+\begin{itemize}
+    \item The virtual environment will contain tools and proper equipment.
+\end{itemize}
+
+\subsubsection*{2.3.2 Instructions}
+\begin{itemize}
+    \item A set of instructions will be displayed on the screen telling the user how to properly and safely install the equipment for overhead and underground.
+    \item User feedback from the virtual environment through vibration and sounds.
+\end{itemize}
+
+\subsection{User Classes and Characteristics}
+The user classes that are anticipated to use this product are field workers who are installing Power Delivery Products (PDP) Smart Navigator Low Current Overhead Remote Fault Indicator (Navigator) for overhead, and for underground, the installation of non-submersible Power Delivery Products (PDP) Remote Fault Indicator (RFI).
+
+\subsubsection*{2.4.1 Field workers}
+\textbf{Southern California Edison field workers}
+\begin{itemize}
+    \item Know to use SCE equipment properly and safely.
+    \item Might not have any experience with virtual reality.
+\end{itemize}
+
+\textbf{Contractors field workers}
+\begin{itemize}
+    \item Might not know how to use SCE equipment properly and safely.
+    \item Might not have any experience with virtual reality.
+\end{itemize}
+
+\subsection{Operating Environment}
+The objects will be created using Blender, and then exported into Unity. In Unity we will create the user experience. For a user to be able to interact in the virtual environment, Meta Quest 2 with controllers will be used. The Meta Quest 2 will contain the training program, so it will be kept inside a room. Since the headset cannot be exposed to the sun (if exposed to the sun, the lens will burn), if a user needs to use the training, they would have to be indoors.
+
+\subsection{Design and Implementation Constraints}
+\begin{itemize}
+    \item 2.6.1 Incompatible Unity and Blender versions
+    \item 2.6.2 No access to a VR headset
+\end{itemize}
+
+\subsection{User Documentation}
+\begin{itemize}
+    \item 2.7.1 System Requirement Specification
+    \item 2.7.2 System Design Specification
+\end{itemize}
+
+\subsection{Assumptions and Dependencies}
+\begin{itemize}
+    \item 2.8.1 User is assumed to have access to a VR headset.
+    \item 2.8.2 User is assumed to be able to operate a VR headset.
+\end{itemize}
+
+\subsection{Apportioning of Requirements}
+ No requirement delays expected.
+
+%3. External Interface Requirements%
+\section{External Interface Requirements}
+
+\subsection{User Interfaces}
+\begin{itemize}
+    \item[3.1.1] The user will be greeted with a home screen with the title of the app.
+    \item[3.1.2] The user will have 3 buttons for navigation on the home screen to choose from: Underground Training, Overhead Training, and Quit.
+    \item[3.1.3] Each training selection will present a task title scene of the requested work environment.
+    \begin{itemize}
+        \item[3.1.3.1] Task title scene will present user with title, brief overview, estimated time of completion, and difficulty level.
+        \item[3.1.3.2] Task title scene will have two buttons: Back and Next.
+    \end{itemize}
+    \item[3.1.4] Each task will have multiple task steps.
+    \begin{itemize}
+        \item[3.1.4.1] Task step scene will display instructions.
+        \item[3.1.4.2] Task step scene will contain button to go back to previous step.
+        \item[3.1.4.3] Task step scene will display progress bar showing how much of task was completed.
+        \item[3.1.4.4] Task step scene will replicate a real world underground-onsite setting or overhead-onsite setting.
+        \item[3.1.4.5] The first step will display all the tools and equipment needed.
+        \item[3.1.4.6] Task step scene will contain 3D models of the tools and equipment used.
+        \item[3.1.4.7] The user will be able to interact with the directed parts of the models in the scene that will contain highlighted visual cues differing from other models with a lighter glowing shade.
+        \item[3.1.4.8] The user will be provided with haptic feedback through the controllers when the user interacts with the correct item.
+        \item[3.1.4.9] The scene will prompt an error message with an explanation when the user fails to complete the step correctly.
+    \end{itemize}
+    \item[3.1.5] The set of instructions for the current step will have a Next button once the step for the task is completed.
+    \item[3.1.6] Once the task is completed, the scene will provide a prompt of completion and two buttons: Home, Quit.
+\end{itemize}
+
+\subsection{Hardware Interfaces}
+\begin{itemize}
+    \item[3.2.1] VR Headset; Meta Quest 2
+    \item[3.2.2] VR Left and Right Controllers
+    \item[3.2.3] PC
+    \begin{itemize}
+        \item[3.2.3.1] 1x USB port
+        \item[3.2.3.2] 8 GB+ RAM
+        \item[3.2.3.3] Processor: Intel i5-4590 / AMD Ryzen 5 1500X or greater
+    \end{itemize}
+    \item[3.2.4] WiFi
+    \item[3.2.5] Optional; Headset or Earphones
+\end{itemize}
+
+\subsection{Software Interfaces}
+\begin{itemize}
+    \item[3.3.1] Android-based operating system version 8.0 or higher
+    \item[3.3.2] Unity version 2021.3.5f1
+    \item[3.3.3] Meta Quest 2 version 46 or higher
+    \item[3.3.4] Windows 10 or higher
+\end{itemize}
+
+\subsection{Communications Interfaces}
+No communication interfaces so far.
+
+%4. Requirements Specification %
+\section{Requirements Specification}
+
+\subsection{Functional Requirements}
+
+\subsubsection*{4.1.1 Application Requirements}
+\begin{itemize}
+    \item[4.1.1.1] The application shall run on a Meta Quest 2 VR headset.
+    \item[4.1.1.2] The application shall be ported from a PC for any future updates.
+    \item[4.1.1.3] The application shall provide a home screen scene.
+    \begin{itemize}
+        \item[4.1.1.3.1] The home screen shall provide the user with two buttons to access both overhead and underground training along with an exit button to access back to the Quest VR Home screen.
+    \end{itemize}
+    \item[4.1.1.4] The application shall provide the user with a Task Intro screen for both underground or overhead training.
+    \begin{itemize}
+        \item[4.1.1.4.1] The application shall display task information:
+        \begin{itemize}
+            \item[4.1.1.4.1.1] Task Title.
+            \item[4.1.1.4.1.2] Task Overview.
+            \item[4.1.1.4.1.3] Task Duration.
+            \item[4.1.1.4.1.4] Task Difficulty.
+        \end{itemize}
+    \end{itemize}
+    \item[4.1.1.5] The application shall have task step screens.
+    \begin{itemize}
+        \item[4.1.1.5.1] Scene shall provide step instructions.
+        \item[4.1.1.5.2] Scene may contain a checklist of items needed.
+        \item[4.1.1.5.3] Scene shall contain navigation buttons:
+        \begin{itemize}
+            \item[4.1.1.5.3.1] Back Button.
+            \item[4.1.1.5.3.2] Next Step.
+            \item[4.1.1.5.3.3] Finish.
+            \item[4.1.1.5.3.4] Quit.
+        \end{itemize}
+    \end{itemize}
+    \item[4.1.1.6] The application shall ensure the user follows all safety protocols.
+    \item[4.1.1.7] The application shall ensure the user installs devices correctly.
+\end{itemize}
+
+\subsection{External Interface Requirements}
+
+\subsubsection*{4.2.1 User Interfaces}
+4.2.1.1
+
+\subsubsection*{4.2.2 Hardware Interfaces}
+\begin{itemize}
+    \item[4.2.2.1] Meta Quest 2 VR headset to run application and visual.
+    \item[4.2.2.2] Meta Quest 2 Left and Right Controllers for application input and output.
+    \item[4.2.3.3] Keyboard is necessary to input on the computer for application updates.
+    \item[4.2.3.4] WiFi Modem.
+    \item[4.2.3.5] WiFi Router.
+    \item[4.2.3.6] 1x USB port.
+    \item[4.2.3.7] 8 GB+ RAM.
+    \item[4.2.3.8] Processor: Intel i5-4590 / AMD Ryzen 5 1500X or greater.
+\end{itemize}
+
+\subsubsection*{4.2.3 Software Interfaces}
+\begin{itemize}
+    \item[4.2.3.1] Windows 10 or higher.
+    \begin{itemize}
+        \item[4.2.3.1.1] Version 22H2 (current) or higher.
+    \end{itemize}
+    \item[4.2.3.2] Unity Hub.
+    \item[4.2.3.3] Unity.
+    \begin{itemize}
+        \item[4.2.3.3.1] Version 2021.3.5f1.
+    \end{itemize}
+    \item[4.2.3.4] Meta Quest OS.
+    \begin{itemize}
+        \item[4.2.3.4.1] Version 46.0 or higher.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Logical Database Requirements}
+No database.
+
+\subsection{Design Constraints}
+\begin{itemize}
+    \item[4.4.1] PC Performance - Need an adequate CPU, RAM, GPU to apply any updates to the application on Unity.
+    \item[4.4.2] Need a Quest VR headset, Quest 2 or newer.
+    \item[4.4.3] Quest 2 hand controllers or newer.
+    \item[4.4.4] Weak Connection - May cause issues with VR connection.
+    \begin{itemize}
+        \item[4.4.2.1] Weak or slow connection will cause visual lag.
+        \item[4.4.2.2] Slow connection may cause lag in application updates.
+    \end{itemize}
+    \item[4.4.5] Must use Unity, Visual Studio / Visual Studio Code, C\#.
+\end{itemize}
+
+% 5. Other Nonfunctional Requirements%
+\section{Other Nonfunctional Requirements}
+
+\subsection{Performance Requirements}
+\begin{itemize}
+    \item[5.1.1] The training simulator should load in under 15 seconds.
+    \item[5.1.2] The system shall transfer data with low latency.
+\end{itemize}
+
+\subsection{Safety Requirements}
+\begin{itemize}
+    \item[5.2.1] The software and system will not pose any harm to users, it is more suitable to carry out in an open space indoors.
+\end{itemize}
+
+\subsection{Security Requirements}
+\begin{itemize}
+    \item[5.3.1] The application may only be used internally at Southern California Edison.
+\end{itemize}
+
+\subsection{Software Quality Attributes}
+\begin{itemize}
+    \item[5.4.1] Ability to add or remove steps from the training sequence.
+    \item[5.4.2] Accurately simulates field worker training.
+    \item[5.4.3] Ability to simulate a variety of environments and training sequences.
+    \item[5.4.4] Seamlessly allows users to alternate between which training they wish to simulate.
+    \item[5.4.5] The system must simulate all safety precautions taken by field workers and alert the user if a safety protocol is violated.
+\end{itemize}
+
+\newpage
+\section{Glossary}
+\subsection{Definitions, Acronyms, and Abbreviations}
+\begin{itemize}
+    \item SCE - Southern California Edison
+    \item VRTA - Virtual Reality Training Application
+    \item PDP - Power Delivery Products
+    \item RFI - Remote Fault Indicator
+\end{itemize}
+
+\subsection{References}
+\begin{itemize}
+    \item SCE Training Guide
+    \item Field Trip to SCE
+    \item Unity
+\end{itemize}
+
+
+\end{document}
