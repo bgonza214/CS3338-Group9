@@ -1,0 +1,561 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{graphicx}
+
+% Simple, clean sans-serif font
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\setstretch{1.15}
+
+\title{Design Specification\\[0.25em]
+SCE VR Training Program}
+\author{Brailey Gonzalez-Oxlaj, Derek Rosales ,Kevin Guerrero}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Purpose}
+This document describes the software design for the SCE VR Training Program.
+It explains the overall architecture, key modules, user interface design, and all
+dependencies required for the project to run. It also provides a consolidated list
+of packages, libraries, and tools that would be needed to containerize the build
+and supporting tooling for the project.
+
+\subsection{System Overview}
+The system is a virtual reality training application built with the Unity game
+engine. It targets the Meta Quest 2 headset and simulates overhead training
+scenarios that field workers encounter when working with electric poles and
+related equipment. The application provides:
+
+\begin{itemize}[nosep]
+  \item A main menu and user interface for navigating training steps.
+  \item Interactive VR controls for grabbing, placing, and manipulating tools.
+  \item An inventory system for transporting tools between scenes.
+  \item Audio management for sound effects and voice-over.
+  \item LED sequence simulation for the Pole Master device.
+\end{itemize}
+
+Assets such as 3D models are created in Blender and/or Autodesk Maya and then
+imported into Unity.
+
+\section{Design Considerations}
+
+\subsection{Assumptions and Dependencies}
+
+The design assumes:
+
+\begin{itemize}[nosep]
+  \item Users have a Meta Quest 2 headset with up-to-date firmware.
+  \item Users are familiar with basic Meta Quest 2 controls (grab, select, primary/secondary buttons).
+  \item Users can read English instructions shown in the UI.
+  \item Training will be conducted in a safe indoor environment with sufficient open space.
+\end{itemize}
+
+\subsection{User Experience Constraints}
+
+\begin{itemize}[nosep]
+  \item The utility truck bucket is static and cannot be moved by the user.
+  \item The user teleports between predefined areas instead of using free locomotion.
+  \item User interaction with the environment is guided and constrained to relevant objects.
+  \item All training guidance is provided via text UI and optional audio.
+\end{itemize}
+
+\subsection{System Constraints}
+
+\begin{itemize}[nosep]
+  \item The application is designed and tested for Meta Quest 2; other VR headsets are not officially supported.
+  \item Performance must be sufficient to maintain a comfortable frame rate for VR (typically 72+ FPS).
+\end{itemize}
+
+\subsection{Goals and Guidelines}
+
+\begin{itemize}[nosep]
+  \item Provide a user-friendly and straightforward guided training experience.
+  \item Base the simulation on real-world procedures and equipment used at SCE.
+  \item Increase trainee engagement, retention, and confidence.
+  \item Use modular design to facilitate future scenario additions or modifications.
+\end{itemize}
+
+\subsection{Development Method}
+
+The team followed an agile development approach with small, iterative tasks,
+frequent feedback, and continuous integration of features. Collaboration tools
+included Zoom and Discord for meetings, GitHub for source control, and Google
+Drive for document sharing.
+
+\section{Architectural Strategies}
+
+\subsection{Tools and Technologies}
+
+\begin{itemize}[nosep]
+  \item \textbf{Game Engine:} Unity (2021.3.x LTS).
+  \item \textbf{Programming Language:} C\#.
+  \item \textbf{IDE:} Microsoft Visual Studio 2019 or later.
+  \item \textbf{3D Modeling:} Blender and Autodesk Maya.
+  \item \textbf{VR Headset:} Meta Quest 2.
+  \item \textbf{Unity Packages:}
+  \begin{itemize}[nosep]
+    \item XR Plugin Management.
+    \item Oculus / OpenXR plugin for Meta Quest 2.
+    \item XR Interaction Toolkit.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Asset Workflow}
+
+\begin{itemize}[nosep]
+  \item 3D assets are modeled in Blender or Maya.
+  \item Assets are exported and imported into Unity as FBX or similar formats.
+  \item Materials, colliders, and interaction components are configured in Unity.
+\end{itemize}
+
+\subsection{Coding Guidelines}
+
+\begin{itemize}[nosep]
+  \item Scripts include header comments explaining the purpose of the file.
+  \item Code sections are commented to clarify logic and interactions.
+  \item Functionality is encapsulated into modules with clear responsibilities.
+\end{itemize}
+
+\section{System Architecture}
+
+\subsection{High-Level Structure}
+
+At a high level, the system consists of the following major subsystems:
+
+\begin{itemize}[nosep]
+  \item Main Menu System.
+  \item UI Management.
+  \item Inventory System.
+  \item Audio Management.
+  \item VR Interaction.
+  \item Pole Master LED Sequence module.
+\end{itemize}
+
+These subsystems interact with each other to form the complete VR training simulation.
+
+\subsection{Level 0 Data Flow Diagram}
+
+Figure~\ref{fig:level0} illustrates the Level 0 data flow, showing the VR Training
+Simulation and its main subsystems.
+
+\begin{figure}[h]
+  \centering
+  % TODO: Replace placeholder with an actual diagram file if desired
+  \includegraphics[width=0.7\textwidth]{level0_dfd_placeholder.png}
+  \caption{Level 0 Data Flow Diagram}
+  \label{fig:level0}
+\end{figure}
+
+\subsection{Level 1 Data Flow Diagram}
+
+Figure~\ref{fig:level1} illustrates a more detailed Level 1 data flow, including
+scenes, tasks, inventory slots, controls, and user interactions.
+
+\begin{figure}[h]
+  \centering
+  % TODO: Replace placeholder with an actual diagram file if desired
+  \includegraphics[width=0.8\textwidth]{level1_dfd_placeholder.png}
+  \caption{Level 1 Data Flow Diagram}
+  \label{fig:level1}
+\end{figure}
+
+\section{Policies and Tactics}
+
+\subsection{Requirements Traceability}
+
+\begin{itemize}[nosep]
+  \item Requirements originate from the SRS, training manuals, and sponsor meetings.
+  \item Ambiguous or missing requirements are clarified with SCE stakeholders.
+  \item Design decisions and changes are recorded in meetings, stored via shared documents and Jira.
+\end{itemize}
+
+\subsection{Testing Strategy}
+
+\begin{itemize}[nosep]
+  \item Continuous feature testing during development sessions.
+  \item Manual playtesting to validate user experience, interaction correctness, and step progression.
+  \item Focus on verifying:
+  \begin{itemize}[nosep]
+    \item Correct behavior of modules (UI, inventory, VR interaction, audio).
+    \item Freedom from critical, simulation-breaking bugs.
+    \item Smooth performance on Meta Quest 2 hardware.
+  \end{itemize}
+\end{itemize}
+
+\section{Detailed System Design}
+
+\subsection{Main Menu Module (MMM)}
+
+\subsubsection{Responsibilities}
+The Main Menu Module provides entry points to the training simulation and
+allows users to navigate between scenes or restart the training.
+
+\subsubsection{Constraints}
+\begin{itemize}[nosep]
+  \item Text is currently provided in English.
+\end{itemize}
+
+\subsubsection{Composition}
+\begin{itemize}[nosep]
+  \item Scene selection option to jump to different training steps or scenes.
+  \item Tasks option to display a checklist of steps and indicate progress.
+  \item Restart option to reset the training simulation from the beginning.
+\end{itemize}
+
+\subsubsection{Interactions}
+The module works with the VR Interaction module to process button presses and
+updates the UI Management and Inventory modules based on user choices.
+
+\subsection{UI Management Module (UIMM)}
+
+\subsubsection{Responsibilities}
+The UI Management Module provides step-by-step text instructions and controls
+to guide the user through the training flow.
+
+\subsubsection{Constraints}
+\begin{itemize}[nosep]
+  \item Users must read English instructions.
+  \item Users must understand basic VR controller operations.
+\end{itemize}
+
+\subsubsection{Composition}
+\begin{itemize}[nosep]
+  \item Text area describing the current step's goal.
+  \item \textbf{Next} button (enabled only when the current step is completed).
+  \item \textbf{Previous} button (where applicable).
+  \item Audio toggle/play button for voice-over or sound effects.
+\end{itemize}
+
+\subsubsection{Interactions}
+The module monitors completion conditions reported by VR Interaction and other
+modules to determine when the user may proceed. It also triggers audio via the
+Audio Management Module and receives input from the controllers.
+
+\subsection{Inventory System Module (ISM)}
+
+\subsubsection{Responsibilities}
+The Inventory System Module handles the logic for storing, retrieving, and
+managing tools and objects used across the training scenes.
+
+\subsubsection{Constraints}
+\begin{itemize}[nosep]
+  \item Inventory size is limited to a small number of relevant items.
+\end{itemize}
+
+\subsubsection{Composition}
+\begin{itemize}[nosep]
+  \item Inventory slot UI elements.
+  \item Text labels showing the name of the object in each slot.
+  \item Dropped item slot that receives items dropped outside the valid area.
+\end{itemize}
+
+\subsubsection{Interactions}
+Users use VR controllers (via the VR Interaction Module) to transfer items between
+the environment and inventory slots. Items dropped outside bounds are teleported
+back to the inventory.
+
+\subsection{Audio Management Module (AMM)}
+
+\subsubsection{Responsibilities}
+The Audio Management Module organizes and plays sound effects and voice-over
+clips. It ensures consistent volume levels and 3D audio positioning.
+
+\subsubsection{Constraints}
+\begin{itemize}[nosep]
+  \item Supported formats include AIFF, WAV, MP3, and Ogg.
+  \item Audio data may be preloaded or streamed as required.
+\end{itemize}
+
+\subsubsection{Composition}
+\begin{itemize}[nosep]
+  \item Global audio manager object controlling volume and mixer settings.
+  \item Audio profiler tools for verifying audio memory and performance.
+\end{itemize}
+
+\subsubsection{Interactions}
+The AMM is triggered by UI events (e.g., audio buttons), VR interaction events
+(e.g., correct item usage), and scene transitions to play appropriate sounds.
+
+\subsection{VR Interaction Module (VRIM)}
+
+\subsubsection{Responsibilities}
+The VR Interaction Module handles the mapping between user inputs (controllers)
+and actions in the virtual environment. It is responsible for:
+
+\begin{itemize}[nosep]
+  \item Grabbing and releasing objects.
+  \item Teleportation between valid locations.
+  \item Interacting with UI elements via ray-based pointers.
+  \item Snap turning and other movement/rotation options.
+\end{itemize}
+
+\subsubsection{Constraints}
+\begin{itemize}[nosep]
+  \item Performance must remain high to avoid VR sickness.
+  \item The user generally interacts with one object at a time per hand.
+\end{itemize}
+
+\subsubsection{Composition}
+\begin{itemize}[nosep]
+  \item Interactable components (objects that respond to grab/use).
+  \item Grabbable components for movable items.
+  \item Teleportation component for location changes.
+  \item UI Interactor for VR-based UI clicking.
+  \item Snap Turn component for discrete rotation.
+\end{itemize}
+
+\subsubsection{Interactions}
+It works closely with UI Management, Inventory, Audio, and the LED Sequence
+module. Controller rays or colliders trigger events such as button presses, object
+pickup, and step completion detection.
+
+\subsection{Pole Master LED Sequence Module (PMLSM)}
+
+\subsubsection{Responsibilities}
+This module simulates Pole Master LED behavior, including WAN, ERR, I/O, and
+DC LEDs, according to the state of the training scenario.
+
+\subsubsection{Constraints}
+Each LED must display the correct color and blinking pattern for different modes
+(e.g., communication, error, pairing, connected, stable power, backup battery).
+
+\subsubsection{Composition}
+\begin{itemize}[nosep]
+  \item WAN LED:
+  \begin{itemize}[nosep]
+    \item Communication Mode: constant blue.
+  \end{itemize}
+  \item ERR LED:
+  \begin{itemize}[nosep]
+    \item Error Mode: red flash once per second.
+  \end{itemize}
+  \item I/O LED:
+  \begin{itemize}[nosep]
+    \item Pairing Mode: yellow flash twice per second.
+    \item Connected Mode: yellow flash once per second.
+  \end{itemize}
+  \item DC LED:
+  \begin{itemize}[nosep]
+    \item Stable Power Mode: constant green.
+    \item Backup Battery Mode: green flash once per second.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Interactions}
+Scripts attached to the Pole Master and related tools (such as the magnet tool)
+trigger LED state changes. Completion of smart navigator installation, or specific
+user actions, causes the LEDs to update.
+
+\section{User Interface Design}
+
+\subsection{Overview}
+
+The UI is designed to be as simple and readable as possible. Upon launching the
+application, users see a panel that:
+
+\begin{itemize}[nosep]
+  \item Introduces the training scenario.
+  \item Provides ``Next'' and ``Play Audio'' buttons.
+\end{itemize}
+
+Subsequent UI panels include:
+
+\begin{itemize}[nosep]
+  \item ``Previous'' and ``Next'' buttons for step navigation.
+  \item ``Play Audio'' button for voice-over.
+  \item Optional access to a menu with options like restart, scene selection, and task list.
+\end{itemize}
+
+\subsection{Screen Frameworks}
+
+% TODO: Replace placeholders with actual UI screenshots
+Figure~\ref{fig:ui_screens} shows example UI screens from the training application.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{ui_screens_placeholder.png}
+  \caption{Example User Interface Screens}
+  \label{fig:ui_screens}
+\end{figure}
+
+\subsection{UI Flow Model}
+
+The UI flow consists of a linear progression of training steps, each with navigation
+buttons and optional menu access. A simple flow model can be represented as:
+
+\begin{itemize}[nosep]
+  \item User Interface
+  \begin{itemize}[nosep]
+    \item Next Button
+    \item Previous Button
+    \item Audio Button (connected to Audio Management)
+    \item Menu Button (connected to Main Menu Module)
+  \end{itemize}
+\end{itemize}
+
+\section{Requirements Validation and Verification (Mapping)}
+
+Table summarizes how key functional requirements are
+satisfied by modules and UI elements.
+
+\begin{longtable}{p{0.35\textwidth} p{0.55\textwidth}}
+\hline
+\textbf{Functional Requirement} & \textbf{Modules / UI Elements} \\
+\hline
+System shall run smoothly on target hardware &
+Optimized component modules and lightweight UI; performance testing on Meta Quest 2. \\
+System should be free of system-breaking errors/bugs &
+Robust module interactions; continuous testing and play sessions. \\
+System shall have sound effects and voice-over &
+Audio Management Module, audio UI buttons. \\
+System shall have options menu &
+Options menu within Main Menu Module and UI Management. \\
+System shall allow player to interact with objects in environment &
+VR Interaction Module, interactable/grabbable components, inventory system. \\
+System shall allow user to adjust volume &
+Volume controls exposed via audio UI and Audio Management Module. \\
+\hline
+\end{longtable}
+
+\section{Dependencies and Environment}
+
+\subsection{Runtime Dependencies}
+
+At runtime on the Meta Quest 2 device, the application depends on:
+
+\begin{itemize}[nosep]
+  \item Meta Quest 2 OS (version 46.0 or higher).
+  \item Android 6.0 (API level 23) or higher.
+  \item Oculus / OpenXR runtime for VR.
+  \item Audio codecs for AIFF, WAV, MP3, and Ogg playback.
+\end{itemize}
+
+\subsection{Development Environment}
+
+On the development machine, the following are required:
+
+\begin{itemize}[nosep]
+  \item Windows 10 or later (22H2 recommended).
+  \item Unity Editor 2021.3.x LTS with:
+  \begin{itemize}[nosep]
+    \item Android Build Support (SDK, NDK, OpenJDK).
+    \item XR Plugin Management.
+    \item Oculus / OpenXR support.
+    \item XR Interaction Toolkit.
+  \end{itemize}
+  \item Unity Hub.
+  \item Visual Studio 2019 or later with C\# support.
+  \item Git (for version control).
+  \item Optional: Blender and Autodesk Maya for asset creation.
+\end{itemize}
+
+\subsection{Unity Packages and Libraries}
+
+Key Unity packages and libraries include:
+
+\begin{itemize}[nosep]
+  \item \textbf{XR Interaction Toolkit}: Provides core VR interaction components.
+  \item \textbf{XR Plugin Management}: Manages underlying VR runtimes.
+  \item \textbf{Oculus / OpenXR plugin}: Handles Meta Quest 2 integration.
+  \item \textbf{TextMeshPro} (if used): For higher-quality text rendering.
+  \item Custom C\# scripts for:
+  \begin{itemize}[nosep]
+    \item Step management and progression.
+    \item Inventory logic.
+    \item Audio triggering.
+    \item LED state control.
+  \end{itemize}
+\end{itemize}
+
+\section{Docker and Containerization Considerations}
+
+\subsection{Purpose of Docker in This Project}
+
+Because VR applications must run on hardware with direct access to the headset,
+Docker is primarily useful for:
+
+\begin{itemize}[nosep]
+  \item Automated build pipelines (CI/CD) for the Unity project.
+  \item Running unit or integration tests that do not require an actual headset.
+  \item Hosting project assets, logs, or documentation.
+\end{itemize}
+
+This section lists the packages and tools that would be needed if a Docker
+container is used to build or process the project.
+
+\subsection{Base Image and System Packages}
+
+A typical container for Unity build automation might include:
+
+\begin{itemize}[nosep]
+  \item Base image: \texttt{ubuntu:20.04} or similar.
+  \item System packages (installed via \texttt{apt}):
+  \begin{itemize}[nosep]
+    \item \texttt{curl}, \texttt{wget}, \texttt{git}, \texttt{unzip}.
+    \item \texttt{ca-certificates}, \texttt{tzdata}.
+    \item \texttt{libgtk-3-0}, \texttt{libnss3}, \texttt{libx11-6}, \texttt{libasound2}
+          (commonly required for Unity CLI).
+    \item \texttt{python3} (if helper scripts are used).
+  \end{itemize}
+\end{itemize}
+
+\subsection{Unity Editor and Build Tools}
+
+\begin{itemize}[nosep]
+  \item Unity Editor (Linux headless / CLI version matching 2021.3.x).
+  \item Android SDK, NDK, and OpenJDK (for Android builds).
+  \item Environment variables configured for Unity license activation (in CI) and
+        Android build tools.
+\end{itemize}
+
+\subsection{Project-Specific Dependencies in the Container}
+
+Within the container, you would copy:
+
+\begin{itemize}[nosep]
+  \item Full Unity project directory (Assets, ProjectSettings, Packages, etc.).
+  \item Custom C\# scripts for all modules (MMM, UIMM, ISM, AMM, VRIM, PMLSM).
+  \item Any required asset packages that are not fetched automatically (or configure Unity
+        to download them from the Unity Asset Store).
+\end{itemize}
+
+If the container is strictly used for building the APK, VR headset access is not
+required; only the build tools and project content are needed.
+
+\section{Glossary}
+
+\begin{description}[style=nextline]
+  \item[Blender] 3D modeling tool used to create models, simulations, and animations.
+  \item[C\#] High-level programming language used for scripting in Unity.
+  \item[Discord] Communication platform used for text, voice, and screen sharing.
+  \item[GitHub] Web-based platform for hosting Git repositories and collaborating on code.
+  \item[Google Drive] Cloud storage service used for storing and sharing documents.
+  \item[Meta Quest 2] Standalone VR headset used to run the training application.
+  \item[Unity] Game engine used to create 2D/3D applications, including this VR training app.
+  \item[Virtual Reality (VR)] Technology that simulates 3D environments that users can interact with.
+  \item[Zoom] Video conferencing tool used for meetings and remote collaboration.
+\end{description}
+
+\section{References}
+
+\begin{itemize}[nosep]
+  \item Unity and VR tutorials, XR Interaction Toolkit documentation.
+  \item YouTube resources on VR interaction, inventory systems, sockets, triggers, and UI in Unity.
+  \item SCE training manuals and in-person training observations.
+\end{itemize}
+
+\end{document}
